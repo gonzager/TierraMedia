@@ -63,7 +63,7 @@ class Hobbit inherits Ser {
 	}
 	
 	override method estaConforme(territorio) =
-		territorio.seresConHabilidadesMayoresA(self.habilidad()).size() >= 2
+		territorio.seresConHabilidadesMayoresA(self.habilidad()).size() <= 2
 
 	override method tomarRecursos(territorio) {
 		territorio.tabaco(-4)
@@ -93,7 +93,7 @@ class Enano inherits Ser{
 	}
 	override method estaConforme(territorio) {
 		const torpes = territorio.seresTorpes()
-		return torpes.size() >=1 && not torpes.contains(self)
+		return torpes.size() <=1 && not torpes.contains(self)
 	}
 	
 	override method tomarRecursos(territorio) {}
