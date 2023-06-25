@@ -1,0 +1,65 @@
+import seres.*
+import territorios.*
+
+describe "Seres y Territorios" {
+	const elfoSilvano = new ElfoSivano()
+	const hobbit = new Hobbit()
+	const enanoHerrero = new EnanoHerrero()
+	const territorio = new Territorio()
+	
+	method initialize() {
+		hobbit.organizarFiesta()
+		territorio.agregarSeres([elfoSilvano,hobbit,enanoHerrero])
+	}
+	
+	test "Habilidades de Seres" {
+		assert.equals(580, elfoSilvano.habilidad())
+		assert.equals(1100, hobbit.habilidad())
+		assert.equals(300, enanoHerrero.habilidad())
+	}
+	
+	test "Amigos del hobbit" {
+		assert.equals(45, hobbit.amigos())
+	}
+	
+	test "Habilidad total del territorio" {
+		assert.equals(1980, territorio.habilidadTotal())
+	}
+	
+	test "Promedio de la habilidad del territorio" {
+		assert.equals(660, territorio.promedioHabilidadTotal())
+	}
+	
+	test "Maxima habiliad entre los seres inmortales" {
+		assert.equals(1100, territorio.maximaHabilidadSeresInmortales())
+	}
+	
+	test "Seres Torpes" {
+		assert.equals([elfoSilvano,enanoHerrero], territorio.seresTorpes())
+	}
+	
+	test "Existe al menos un ser morta" {
+		assert.that(territorio.haySerMortal())
+	}
+	
+	test "Realizar Torneo" {
+		territorio.realizarTorneo()
+		assert.equals(40, elfoSilvano.canciones())
+		assert.equals(53, hobbit.amigos())
+		assert.equals(500, enanoHerrero.ira())
+		assert.equals(580, elfoSilvano.habilidad())
+		assert.equals(1100, hobbit.habilidad())
+		assert.equals(400, enanoHerrero.habilidad())
+		assert.equals([elfoSilvano,enanoHerrero], territorio.seresTorpes())
+	}
+	
+	test "Hubo Epifanía" {
+		territorio.realizarTorneo()
+		territorio.epifania()
+		assert.equals(80, elfoSilvano.canciones())
+		assert.equals(640, elfoSilvano.habilidad())
+		assert.equals(53, hobbit.amigos())
+		assert.equals(800, enanoHerrero.ira())
+	}
+	
+}
